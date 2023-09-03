@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { OpenAI } from 'langchain/llms/openai';
 
 const llm = new OpenAI({
@@ -15,7 +15,7 @@ const ChatComponent = () => {
   const [messages, setMessages] = useState<Array<Message>>([]);
   const [input, setInput] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim() !== '') {
       messages.push({ text: input, sender: 'You' });
