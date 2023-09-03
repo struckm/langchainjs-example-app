@@ -18,13 +18,10 @@ const ChatComponent = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim() !== '') {
-      messages.push({ text: input, sender: 'You' });
-      setMessages([...messages,] );
+      setMessages(prevArray => [...prevArray, { text: input, sender: 'You' }]);
       llm.predict(input)
         .then(res => {
-          console.log(res);
-          messages.push({ text: res, sender: 'ChatGPT' })
-          setMessages([...messages,] );
+          setMessages(prevArray => [...prevArray, { text: res, sender: 'ChatGPT' }]);
           setInput('');
         });
     }
